@@ -1,0 +1,60 @@
+{
+  "name": "tetap-design-space",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "tetap": "yr-cli",
+    "dev": "concurrently \"npm-run-all dev:web\" \"pnpm run dev:electron\"",
+    "dev:electron": "pnpm run -C packages/electron dev",
+    "dev:web": "pnpm run -C packages/main dev",
+    "electron:fix": "pnpm run run:electron:fix && pnpm run -C packages/electron deps",
+    "run:electron:fix": "cd packages/electron/node_modules/electron && node install",
+    "lint:eslint": "eslint --fix --ext .js,.ts,.tsx ./packages",
+    "lint:prettier": "prettier --write --loglevel warn \"packages/**/*.{js,ts,json,tsx,css,less,scss}\"",
+    "lint:stylelint": "stylelint --fix --aei \"packages/**/*.{less,postcss,css}\" --custom-syntax postcss-scss",
+    "format": " npm run lint:stylelint && npm run lint:prettier && npm run lint:eslint",
+    "postinstall": "pnpm electron:fix",
+    "prepare": "husky install"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "format"
+    }
+  },
+  "lint-staged": {
+    "packages/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write --loglevel warn"
+    ],
+    "packages/**/*.{less,postcss,css,scss}": [
+      "stylelint --fix --custom-syntax postcss-less --cache --cache-location node_modules/.cache/stylelint/"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.5",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "@vue/eslint-config-typescript": "^12.0.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-vue": "^9.20.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "npm-run-all": "^4.1.5",
+    "path": "^0.12.7",
+    "postcss-scss": "^4.0.9",
+    "prettier": "^3.2.4",
+    "sass": "^1.70.0",
+    "stylelint": "^16.2.0",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-recess-order": "^4.4.0",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-scss": "^6.0.0",
+    "typescript": "^5.3.3",
+    "yr-cli": "^0.1.6"
+  }
+}

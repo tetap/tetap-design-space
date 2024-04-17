@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "strict": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": false,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "removeComments": true,
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "outDir": "./release/app", // * 编译生成的文件存放路径
+    "noEmit": false, // * 不生成输出文件
+    "module": "commonjs", // * 指定使用模块: 'commonjs', 'amd', 'system', 'umd' or 'es2015'
+    "baseUrl": ".",
+    "sourceMap": false // * 是否生成相应的 '.map' 文件
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts"],
+  "exclude": ["node_modules", "dist", "release"]
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetap</title>
+    <style>
+      #loading.hidden {
+        opacity: 0;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+    <div
+      id="loading"
+      class="bg-[#1f1f1f] fixed left-0 top-0 z-[999] flex items-center justify-center w-full h-full"
+    >
+      <div class="w-[240px] flex-none bg-[#181818] h-full animate-pulse"></div>
+      <div class="min-w-0 flex-1 h-full">
+        <div class="bg-[#181818] h-[42px] flex-none animate-pulse"></div>
+        <div class="p-4 flex flex-col gap-4">
+          <div class="animate-pulse h-32 rounded-lg bg-[#181818]"></div>
+          <div class="animate-pulse h-32 rounded-lg bg-[#181818]"></div>
+          <div class="animate-pulse h-32 rounded-lg bg-[#181818]"></div>
+          <div class="animate-pulse h-32 rounded-lg bg-[#181818]"></div>
+          <div class="animate-pulse h-32 rounded-lg bg-[#181818]"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
