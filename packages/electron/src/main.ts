@@ -1,7 +1,6 @@
 import { app, BrowserWindow } from 'electron'
 import { createWindow } from './window/mainWindow'
 import { installShortcut, unInstallShortcut } from './shortcut'
-import { fork } from 'child_process'
 import './utils/command'
 ;(async () => {
   // 禁止应用创建多个
@@ -9,15 +8,6 @@ import './utils/command'
   if (!gotTheLock) return app.quit()
   await app.whenReady()
   let mainWindow = await createWindow()
-  for (let i = 0; i < 100; i++) {
-    console.log(
-      fork('-v', {
-        stdio: 'pipe'
-      }).on('message', (res) => {
-        console.log(123, res)
-      })
-    )
-  }
 
   // 通常在 macOS 上，当点击 dock 中的应用程序图标时，如果没有其他打开的窗口，那么程序会重新创建一个窗口。
   app.on('activate', async () => {
