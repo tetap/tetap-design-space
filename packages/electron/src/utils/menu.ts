@@ -25,13 +25,6 @@ export class MenuBuilder {
               { role: 'delete' },
               { role: 'selectall' },
               { label: 'copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' }
-              // { role: 'copy' },
-              // { label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
-              // { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
-              // { label: 'SelectAll', accelerator: 'CmdOrCtrl+A', selector: 'selectall:' },
-              // { label: 'Undo', accelerator: 'CmdOrCtrl+Z', selector: 'undo:' },
-              // { label: 'Redo', accelerator: 'CmdOrCtrl+Y', selector: 'redo:' },
-              // { label: 'delete', accelerator: 'Delete', selector: 'delete:' }
             ]
           }
         ]

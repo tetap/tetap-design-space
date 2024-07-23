@@ -1,15 +1,9 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-
-const libs: any = import.meta.glob('./libs/*.ts', { eager: true })
-
-const routes: RouteRecordRaw[] = []
-for (const lib in libs) {
-  routes.push(...libs[lib].default)
-}
+import { createRouter, createWebHashHistory } from 'vue-router'
+import { genRoutes } from './utils/scan'
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes
+  history: createWebHashHistory(),
+  routes: genRoutes()
 })
 
 export default router

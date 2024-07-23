@@ -3,6 +3,7 @@ import { join, resolve } from 'path'
 import windowStateKeeper from 'electron-window-state'
 import { configureWindow } from '../utils/configureWindow'
 import { MenuBuilder } from '../utils/menu'
+import { mainIpc } from '../ipc'
 /**
  * packages.json,script中通过cross-env NODE_ENV=production设置的环境变量
  * 'production'|'development'
@@ -25,8 +26,7 @@ async function createWindow() {
     minWidth: 1024,
     minHeight: 600,
     fullscreenable: false, //禁止F11全屏
-    // frame: process.platform !== 'win32', // * app边框(包括关闭,全屏,最小化按钮的导航栏) @false: 隐藏
-    frame: true,
+    frame: false, // * app边框(包括关闭,全屏,最小化按钮的导航栏) @false: 隐藏
     transparent: false, // * app 背景透明
     hasShadow: false, // * app 边框阴影
     show: false, // 启动窗口时隐藏,直到渲染进程加载完成「ready-to-show 监听事件」 再显示窗口,防止加载时闪烁
@@ -35,7 +35,7 @@ async function createWindow() {
       preload: join(__dirname, '..', 'preload'), // 加载脚本
       backgroundThrottling: false,
       nodeIntegration: true, // 渲染层可以使用node
-      contextIsolation: false, //允许渲染进程使用nodejs
+      contextIsolation: true, //允许渲染进程使用nodejs
       webSecurity: false // 跨域
     }
   })
@@ -61,6 +61,8 @@ async function createWindow() {
     const winURL = `file://${resolve(__dirname, '..')}/index.html`
     Window.loadURL(winURL)
   }
+  // 开启IPC事件通信
+  mainIpc(Window)
   // 窗口默认事件拦截
   configureWindow(Window)
   // 菜单

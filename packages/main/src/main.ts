@@ -1,13 +1,26 @@
 import { createApp } from 'vue'
 import router from './router'
 import App from './App.vue'
-import 'normalize.css'
+
+// #region 基础样式
 import './theme/global.scss'
+// #endregion 样式
+
+// #region 组件库
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import { mdi } from 'vuetify/iconsets/mdi-svg'
+// #endregion 组件库
 
 const app = createApp(App)
 
-app.use(router)
+const vuetify = createVuetify({
+  icons: {
+    defaultSet: 'mdi',
+    sets: {
+      mdi
+    }
+  }
+})
 
-app.mount('#app')
-
-document.getElementById('loading')?.classList?.add('hidden')
+app.use(vuetify).use(router).mount('#app')
