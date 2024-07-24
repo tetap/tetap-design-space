@@ -11,6 +11,11 @@ export default {
       path: 'dashboard',
       meta: {},
       component: () => import('@/pages/dashboard/src/home.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: () => import('@/pages/dashboard/src/notFound.vue')
     }
   ]
 } as unknown as RouteRecordRaw

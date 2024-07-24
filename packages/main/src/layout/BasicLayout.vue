@@ -10,9 +10,22 @@
     <div class="flex-1 min-w-0 min-h-0 flex flex-row">
       <div class="flex-none">
         <v-list density="compact" width="220px">
-          <v-list-item title="Inbox" value="inbox" color="primary"></v-list-item>
-          <v-list-item title="Supervisors" value="supervisors" color="primary"></v-list-item>
-          <v-list-item title="Clock-in" value="clockin" color="primary"></v-list-item>
+          <v-list-item
+            :active="route.fullPath === '/dashboard'"
+            :prepend-icon="mdiAppleKeyboardCommand"
+            :exact="true"
+            title="工作台"
+            to="/"
+            color="primary"
+          ></v-list-item>
+          <v-divider class="mt-4 mb-4 border-opacity-100"></v-divider>
+          <v-list-item
+            :prepend-icon="mdiAppleKeyboardCommand"
+            :exact="true"
+            title="工作台"
+            to="/test"
+            color="primary"
+          ></v-list-item>
         </v-list>
       </div>
       <div class="overflow-y-auto flex-1 min-w-0">
@@ -23,7 +36,13 @@
 </template>
 
 <script lang="ts" setup>
+import { useRoute } from 'vue-router'
+import { mdiAppleKeyboardCommand } from '@mdi/js'
 import WindowEvent from './components/WindowEvent.vue'
+
+const route = useRoute()
+
+route
 </script>
 
 <style lang="scss" scoped></style>
