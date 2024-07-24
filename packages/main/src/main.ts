@@ -9,6 +9,7 @@ import './theme/global.scss'
 // #region 组件库
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
+import colors from 'vuetify/util/colors'
 import { mdi } from 'vuetify/iconsets/mdi-svg'
 // #endregion 组件库
 
@@ -19,6 +20,17 @@ const vuetify = createVuetify({
     defaultSet: 'mdi',
     sets: {
       mdi
+    }
+  },
+  theme: {
+    themes: {
+      light: {
+        dark: false,
+        colors: {
+          primary: colors.indigo.darken3,
+          secondary: colors.indigo.darken4
+        }
+      }
     }
   }
 })

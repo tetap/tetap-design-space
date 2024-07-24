@@ -14,7 +14,7 @@ const NODE_ENV = process.env.NODE_ENV === 'development'
 async function createWindow() {
   const mainWindowState = windowStateKeeper({
     defaultWidth: 1024,
-    defaultHeight: 680
+    defaultHeight: 600
   })
 
   // 生成窗口实例

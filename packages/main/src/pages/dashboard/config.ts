@@ -13,6 +13,12 @@ export default {
       component: () => import('@/pages/dashboard/src/home.vue')
     },
     {
+      name: 'setting',
+      path: 'setting',
+      meta: {},
+      component: () => import('@/pages/dashboard/src/setting.vue')
+    },
+    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: () => import('@/pages/dashboard/src/notFound.vue')

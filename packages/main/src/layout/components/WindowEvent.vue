@@ -31,7 +31,6 @@ function windowEvent(event: string) {
   window.ipc.send('window-nav-event', event)
 }
 window.ipc.addEventListener('window-nav-restore', (_, event: boolean) => {
-  console.log(event)
   isMaximized.value = event
 })
 </script>
