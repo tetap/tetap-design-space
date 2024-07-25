@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@overlastic/vue": "^0.8.0",
     "@vueuse/core": "^10.11.0",
     "axios": "^1.7.2",
     "lodash-es": "^4.17.21",
@@ -23,6 +24,7 @@
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.14.11",
     "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.39",
     "sass": "^1.77.8",

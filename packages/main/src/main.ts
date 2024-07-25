@@ -6,6 +6,10 @@ import App from './App.vue'
 import './theme/global.scss'
 // #endregion 样式
 
+// #region 第三方插件
+import overlays from '@overlastic/vue'
+// #endregion 第三方插件
+
 // #region 组件库
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
@@ -35,4 +39,4 @@ const vuetify = createVuetify({
   }
 })
 
-app.use(vuetify).use(router).mount('#app')
+app.use(overlays).use(vuetify).use(router).mount('#app')
