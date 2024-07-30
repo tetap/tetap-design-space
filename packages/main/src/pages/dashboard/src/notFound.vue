@@ -1,14 +1,5 @@
 <template>
-  <v-empty-state
-    headline="Whoops, 404"
-    title="Page not found"
-    text="The page you were looking for does not exist"
-    action-text="Back to Home"
-  >
-    <template v-slot:actions>
-      <v-btn text="Back to Home" color="indigo-darken-3" @click="onClickAction"></v-btn>
-    </template>
-  </v-empty-state>
+  <div>404</div>
 </template>
 
 <script lang="ts" setup>

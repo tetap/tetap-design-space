@@ -10,14 +10,14 @@
   "dependencies": {
     "@tetap/overlastic-vue": "^0.8.1",
     "@vueuse/core": "^10.11.0",
+    "ant-design-vue": "^4.2.3",
     "axios": "^1.7.2",
     "lodash-es": "^4.17.21",
     "normalize.css": "^8.0.1",
     "tailwind-variants": "^0.2.1",
     "vue": "^3.4.33",
     "vue-i18n": "^9.13.1",
-    "vue-router": "^4.4.0",
-    "vuetify": "^3.6.13"
+    "vue-router": "^4.4.0"
   },
   "devDependencies": {
     "@mdi/js": "^7.4.47",
@@ -34,7 +34,6 @@
     "vite": "^5.3.4",
     "vite-plugin-optimize-persist": "^0.1.2",
     "vite-plugin-package-config": "^0.1.1",
-    "vite-plugin-vuetify": "^2.0.3",
     "vue-tsc": "^2.0.28"
   }
 }

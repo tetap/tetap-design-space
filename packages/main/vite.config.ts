@@ -2,11 +2,10 @@ import { defineConfig } from 'vite'
 import { URL, fileURLToPath } from 'url'
 import vue from '@vitejs/plugin-vue'
 import jsx from '@vitejs/plugin-vue-jsx'
-import vuetify from 'vite-plugin-vuetify'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), jsx(), vuetify({ autoImport: true })],
+  plugins: [vue(), jsx()],
   server: {
     port: 18181,
     strictPort: true,

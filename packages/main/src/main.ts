@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import router from './router'
+import i18n from './locale'
 import App from './App.vue'
 
 // #region 基础样式
@@ -10,36 +11,12 @@ import './theme/global.scss'
 import overlays from '@tetap/overlastic-vue'
 // #endregion 第三方插件
 
-// #region 组件库
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import colors from 'vuetify/util/colors'
-import { mdi } from 'vuetify/iconsets/mdi-svg'
-// #endregion 组件库
-
 const app = createApp(App)
 
-const vuetify = createVuetify({
-  icons: {
-    defaultSet: 'mdi',
-    sets: {
-      mdi
-    }
-  },
-  theme: {
-    themes: {
-      light: {
-        dark: false,
-        colors: {
-          primary: colors.indigo.darken3,
-          secondary: colors.indigo.darken4,
-          error: colors.red.accent4,
-          success: colors.green.accent3,
-          info: colors.blue.accent3
-        }
-      }
-    }
-  }
-})
+app.use(router).use(i18n)
 
-app.use(overlays.install).use(vuetify).use(router).mount('#app')
+// #region 第三方插件
+app.use(overlays.install)
+// #endregion 第三方插件
+
+app.mount('#app')
