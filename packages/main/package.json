@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@overlastic/vue": "^0.8.0",
+    "@tetap/overlastic-vue": "^0.8.1",
     "@vueuse/core": "^10.11.0",
     "axios": "^1.7.2",
     "lodash-es": "^4.17.21",

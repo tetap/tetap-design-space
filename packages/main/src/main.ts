@@ -7,7 +7,7 @@ import './theme/global.scss'
 // #endregion 样式
 
 // #region 第三方插件
-import overlays from '@overlastic/vue'
+import overlays from '@tetap/overlastic-vue'
 // #endregion 第三方插件
 
 // #region 组件库
@@ -32,11 +32,14 @@ const vuetify = createVuetify({
         dark: false,
         colors: {
           primary: colors.indigo.darken3,
-          secondary: colors.indigo.darken4
+          secondary: colors.indigo.darken4,
+          error: colors.red.accent4,
+          success: colors.green.accent3,
+          info: colors.blue.accent3
         }
       }
     }
   }
 })
 
-app.use(overlays).use(vuetify).use(router).mount('#app')
+app.use(overlays.install).use(vuetify).use(router).mount('#app')

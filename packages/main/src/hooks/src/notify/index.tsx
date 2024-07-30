@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import { useExtendOverlay, renderOverlay } from '@overlastic/vue'
+import { useExtendOverlay, renderOverlay } from '@tetap/overlastic-vue'
 import { VSnackbar } from 'vuetify/components/VSnackbar'
 
 export const NotifyComponent = defineComponent({
@@ -7,6 +7,14 @@ export const NotifyComponent = defineComponent({
     message: {
       type: String,
       default: ''
+    },
+    color: {
+      type: String,
+      default: 'primary'
+    },
+    timeout: {
+      type: Number,
+      default: 3000
     }
   },
   setup(props) {
@@ -16,26 +24,26 @@ export const NotifyComponent = defineComponent({
     return () => (
       <VSnackbar
         modelValue={visible.value}
-        timer={true}
-        timeout={3000}
-        color="success"
-        rounded="pill"
+        timeout={props.timeout}
+        color={props.color}
         onUpdate:modelValue={(visible) => {
           if (!visible) vanish()
         }}
+        class="pointer-events-none"
       >
         {props.message}
-        {{
-          actions: () => {
-            return [<v-icon icon="mdi-calendar" start></v-icon>]
-          }
-        }}
       </VSnackbar>
     )
   }
 })
 
 export const useNotify = () => {
-  const show = () => renderOverlay(NotifyComponent, { message: 'Hello World' })
+  const show = (
+    message: string,
+    options?: Partial<{
+      color: 'success' | 'error' | 'primary' | 'info' | string
+      timeout: number
+    }>
+  ) => renderOverlay(NotifyComponent, { message, ...options })
   return { show }
 }

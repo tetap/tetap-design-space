@@ -30,16 +30,16 @@
 
 <script lang="ts" setup>
 import { AppStoreConfig } from '@/config'
-import { NotifyComponent, useNotify } from '@/hooks'
+import { useNotify } from '@/hooks'
 
 const { show } = useNotify()
 
-async function handleJumpExtension(store: (typeof AppStoreConfig)[0]) {
+function handleJumpExtension(store: (typeof AppStoreConfig)[0]) {
   if (store.loading) return
   const isDev = import.meta.env.DEV
   const src = isDev ? store.devSrc : store.src
   store.loading = true
-  show().finally(() => {
+  show('test', { color: 'red', timeout: 1000 }).finally(() => {
     // await window.ipc.invoke('run-extension').catch((error) => {})
     store.loading = false
   })
