@@ -4,6 +4,7 @@
  *@date-time: 2023-07-31 10:26:22
  */
 import { contextBridge, ipcRenderer } from 'electron'
+import './logger/renderer'
 
 contextBridge.exposeInMainWorld('ipc', {
   send: (channel: string, ...args: any[]) => ipcRenderer.send(channel, ...args),

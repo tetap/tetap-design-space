@@ -7,6 +7,7 @@
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
+    "composite": true,
     "sourceMap": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -17,7 +18,15 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "main.ts", "App.vue"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "main.ts",
+    "App.vue",
+    "./components.d.ts"
+  ],
   "exclude": ["node_modules", "dist", "release", "src/**/*.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

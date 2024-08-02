@@ -2,10 +2,12 @@ import { defineConfig } from 'vite'
 import { URL, fileURLToPath } from 'url'
 import vue from '@vitejs/plugin-vue'
 import jsx from '@vitejs/plugin-vue-jsx'
+import SvgLoader from 'vite-svg-loader'
+import AutoImport from 'unplugin-auto-import/vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), jsx()],
+  plugins: [vue(), jsx(), SvgLoader(), AutoImport()],
   server: {
     port: 18181,
     strictPort: true,

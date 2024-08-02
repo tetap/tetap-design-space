@@ -10,3 +10,17 @@ html {
   user-select: none;
   -webkit-user-drag: none;
 }
+
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #999999;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px rgb(0 0 0 / 20%);
+}
+::-webkit-scrollbar-track {
+  border-radius: 0;
+}

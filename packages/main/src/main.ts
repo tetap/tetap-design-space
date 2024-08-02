@@ -11,12 +11,18 @@ import './theme/global.scss'
 import overlays from '@tetap/overlastic-vue'
 // #endregion 第三方插件
 
+// #region Electron事件
+import logger from './utils/electron/logger'
+// #endregion Electron事件
+
+logger()
+
 const app = createApp(App)
 
 app.use(router).use(i18n)
 
 // #region 第三方插件
-app.use(overlays.install)
+app.use(overlays)
 // #endregion 第三方插件
 
 app.mount('#app')

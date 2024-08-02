@@ -1,4 +1,5 @@
 import { app, powerSaveBlocker } from 'electron'
+import '../logger/main'
 
 // 默认情况下，如果 GPU 进程过于频繁地崩溃，Chromium 会禁用 3D API（例如 WebGL），直到在每个域的基础上重新启动。此功能禁用该行为。
 app.disableDomainBlockingFor3DAPIs()

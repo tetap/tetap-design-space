@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+/// <reference types="vite-svg-loader" />
 
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
@@ -24,5 +25,12 @@ interface Window {
     removeListener(channel: string, listener: (...args: any[]) => void): this
 
     send(channel: string, ...args: any[]): void
+  }
+
+  logger: {
+    error: (message?: any, ...optionalParams: any[]) => void
+    info: (message?: any, ...optionalParams: any[]) => void
+    log: (message?: any, ...optionalParams: any[]) => void
+    warn: (message?: any, ...optionalParams: any[]) => void
   }
 }
