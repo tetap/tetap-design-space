@@ -7,10 +7,10 @@
       :class="{ 'active !bg-primary-200 text-while': route.path === item.key }"
       @click="handleClick(item)"
     >
-      <div v-if="item.icon" class="flex-none text-base">
+      <div v-if="item.icon" class="flex-none text-xl">
         <Component :is="item.icon" />
       </div>
-      <div class="flex-1 text-sm text-ellipsis overflow-hidden whitespace-nowrap min-w-0">
+      <div class="flex-1 text-base text-ellipsis overflow-hidden whitespace-nowrap min-w-0">
         {{ item.title }}
       </div>
     </div>

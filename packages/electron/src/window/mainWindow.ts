@@ -53,23 +53,18 @@ async function createWindow() {
     Window.setBounds(bounds)
   }
   // 开发环境 打开开发者工具
-  if (NODE_ENV) {
-    Window.webContents.openDevTools()
-    const winURL = `http://localhost:18181`
-    Window.loadURL(winURL)
-  } else {
-    const winURL = `file://${resolve(__dirname, '..')}/index.html`
-    Window.loadURL(winURL)
-  }
+  const uri = NODE_ENV ? `http://localhost:18181` : `file://${resolve(__dirname, '..')}/index.html`
+  Window.loadURL(uri)
   // 开启IPC事件通信
   mainIpc(Window)
   // 窗口默认事件拦截
   configureWindow(Window)
-  // 菜单
-  const menuBuilder = new MenuBuilder(Window)
-  menuBuilder.buildMenu()
+
   // 启动窗口时隐藏,直到渲染进程加载完成「ready-to-show 监听事件」 再显示窗口,防止加载时闪烁
   Window.once('ready-to-show', () => {
+    // 菜单
+    const menuBuilder = new MenuBuilder(Window)
+    menuBuilder.buildMenu()
     Window.show() // 显示窗口
   })
   return Window

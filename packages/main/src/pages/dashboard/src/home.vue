@@ -4,7 +4,7 @@
     <div
       class="grid gap-2 grid-cols-1 2xl:grid-cols-7 xl:grid-cols-5 md:grid-cols-3 sm:grid-cols-2"
     >
-      <RowItem v-for="store in AppStoreConfig" :key="store.id" :store="store" />
+      <RowItem v-for="store in AppStoreConfig" :key="store.name" :store="store" />
     </div>
   </div>
 </template>

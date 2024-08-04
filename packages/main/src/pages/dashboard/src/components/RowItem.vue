@@ -22,20 +22,20 @@
 </template>
 
 <script lang="ts" setup>
-import type { AppStoreConfig } from '@/config'
+import { toRaw } from 'vue'
 import { Spin } from '@/icons'
+import type { AppStoreConfig } from '@/config'
 
 defineProps<{ store: (typeof AppStoreConfig)[0] }>()
 
 function handleJumpExtension(store: (typeof AppStoreConfig)[0]) {
   if (store.loading) return
-  const { src } = store
   store.loading = true
-  setTimeout(() => {
-    store.loading = false
-  }, 1000)
-  // window.ipc.invoke('open-extension', src).finally(() => {
-  //   store.loading = false
-  // })
+  console.log(Object.assign(toRaw(store), { src: store.dev }))
+  window.ipc
+    .invoke('open-extension', Object.assign(toRaw(store), { src: store.dev }))
+    .finally(() => {
+      store.loading = false
+    })
 }
 </script>

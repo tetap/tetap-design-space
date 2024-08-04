@@ -2,6 +2,7 @@ import { BrowserWindow, ipcMain } from 'electron'
 
 export function initNav(window: BrowserWindow) {
   ipcMain.on('window-nav-event', (_, arg) => {
+    const window = BrowserWindow.getFocusedWindow()
     switch (arg) {
       case 'minimize':
         window.minimize()

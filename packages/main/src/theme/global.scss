@@ -2,15 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  overflow: auto !important;
-}
-
-* {
+body * {
   user-select: none;
   -webkit-user-drag: none;
 }
-
 
 ::-webkit-scrollbar {
   width: 6px;

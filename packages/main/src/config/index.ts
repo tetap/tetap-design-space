@@ -21,10 +21,18 @@ export const SiteConfig = {
 
 export const AppStoreConfig = reactive([
   {
-    id: 1,
+    name: 'fanqie-download',
     title: '番茄小说下载',
-    icon: new URL('@/assets/store/fanqie.webp', import.meta.url).href,
-    src: '',
+    icon: 'https://img.z4a.net/images/2024/08/03/1143417865_1958658946_1086986363.webp',
+    dev: 'http://localhost:28080',
+    version: '1.0.0',
+    windowOptions: {
+      width: 375,
+      height: 667,
+      resize: false,
+      resizable: false,
+      maximizable: false
+    },
     loading: false
   }
 ])

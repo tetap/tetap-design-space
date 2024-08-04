@@ -7,6 +7,7 @@
       <img src="@/assets/window_manager/ic_chrome_minimize.png" alt="logo" class="w-6/12 h-auto" />
     </div>
     <div
+      v-if="maximized"
       class="aspect-square h-full hover:bg-gray-200 active:bg-gray-300 cursor-pointer flex items-center justify-center"
       @click="windowEvent('restore')"
     >
@@ -25,6 +26,16 @@
 import { ref } from 'vue'
 import WindowMaximize from '@/assets/window_manager/ic_chrome_maximize.png'
 import WindowRestore from '@/assets/window_manager/ic_chrome_unmaximize.png'
+
+withDefaults(
+  defineProps<{
+    maximized?: boolean
+  }>(),
+  {
+    maximized: true
+  }
+)
+
 const isMaximized = ref(false)
 
 function windowEvent(event: string) {

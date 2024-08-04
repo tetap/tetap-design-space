@@ -1,0 +1,15 @@
+[
+  {
+    "name": "fanqie-download",
+    "title": "番茄小说下载",
+    "icon": "https://s21.ax1x.com/2024/08/02/pkjMcEq.webp",
+    "dev": "http://localhost:28080",
+    "version": "1.0.0",
+    "windowOptions": {
+      "width": 375,
+      "height": 667,
+      "resize": false,
+      "maximize": false
+    }
+  }
+]

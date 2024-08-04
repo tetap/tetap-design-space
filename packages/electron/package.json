@@ -1,6 +1,6 @@
 {
   "name": "@tetap-design-space/electron",
-  "description": "electron程序",
+  "description": "Tetap 工具箱",
   "version": "2.2.2",
   "scripts": {
     "dev": "pnpm run start",

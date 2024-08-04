@@ -24,6 +24,12 @@ import './utils/command'
     mainWindow.focus()
   })
 
+  // 主窗口关闭时退出程序
+  mainWindow.on('close', (e: any) => {
+    console.log(e)
+    app.quit()
+  })
+
   // 除了 macOS 外，当所有窗口都被关闭的时候退出程序。 macOS窗口全部关闭时,dock中程序不会退出
   app.on('window-all-closed', () => {
     app.quit()
@@ -32,7 +38,7 @@ import './utils/command'
   // 客户端聚焦
   app.on('browser-window-focus', () => {
     // 注册快捷键
-    installShortcut(mainWindow)
+    installShortcut()
   })
   // 客户端失去焦点
   app.on('browser-window-blur', () => {

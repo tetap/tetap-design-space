@@ -23,6 +23,7 @@ app.commandLine.appendSwitch('enable-webassembly-relaxed-simd')
 app.commandLine.appendSwitch('canvas-oop-rasterization')
 app.commandLine.appendSwitch('canvas-2d-layers')
 app.commandLine.appendSwitch('allow-file-access-from-files')
+app.commandLine.appendSwitch('disable-web-security')
 // 禁用代理
 app.commandLine.appendSwitch('--ignore-gpu-blocklist')
 app.commandLine.appendSwitch('--enable-gpu-rasterization')
