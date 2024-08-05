@@ -3,13 +3,18 @@ import { fork } from 'child_process'
 import { createWindow } from './window/mainWindow'
 import { installShortcut, unInstallShortcut } from './shortcut'
 import './utils/command'
+import path from 'path'
 ;(async () => {
   // 禁止应用创建多个
   const gotTheLock = app.requestSingleInstanceLock()
   if (!gotTheLock) return app.quit()
 
   // 创建服务进程
-  fork(require.resolve('@tetap-design-space/service/dist/main.js'))
+  // if (process.env.NODE_ENV !== 'development') {
+  fork(require.resolve('@tetap-design-space/service/dist/main.js'), [
+    JSON.stringify({ prop: 39090, appPath: path.parse(app.getPath('exe')).dir })
+  ])
+  // }
 
   // 创建主窗口
   await app.whenReady()

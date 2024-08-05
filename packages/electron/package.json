@@ -58,7 +58,7 @@
     },
     "files": [
       "./release/app/**/*",
-      "!**/node_modules/**/*.{c,h,cpp,hpp,md,ts,map,iobj,lib,ipdb,mjs,scss,less,html,wiki,lock,rs,d.cts,spec.js,Makefile,bak}",
+      "!**/node_modules/**/*.{c,h,cpp,hpp,md,ts,map,iobj,lib,ipdb,mjs,scss,less,html,wiki,lock,rs,d.cts,spec.js,Makefile,bak,tsbuildinfo}",
       "!**/node_modules/**/LICENSE",
       "!**/node_modules/**/LICENSE.APACHE2",
       "!**/node_modules/**/LICENSE.BSD",

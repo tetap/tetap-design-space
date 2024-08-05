@@ -14,7 +14,11 @@
     "lint:stylelint": "stylelint --fix --aei \"packages/**/*.{less,postcss,css}\" --custom-syntax postcss-scss",
     "format": " npm run lint:stylelint && npm run lint:prettier && npm run lint:eslint",
     "postinstall": "pnpm electron:fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build:win": "npm-run-all build:web build:electron:tsc build:electron:win",
+    "build:web": "pnpm run -C packages/main build",
+    "build:electron:win": "pnpm run -C packages/electron build:win",
+    "build:electron:tsc": "pnpm run -C packages/electron build:tsc"
   },
   "husky": {
     "hooks": {

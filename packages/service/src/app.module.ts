@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import config from './config';
 
 // #region modules
 import { TaskModule } from './module/task/task.module';
 // #endregion modules
 
-// #endregion
 @Module({
   imports: [
     // 数据库
@@ -17,7 +17,7 @@ import { TaskModule } from './module/task/task.module';
           autoLoadEntities: true,
           keepConnectionAlive: true,
           timezone: '+08:00',
-          database: './databases/app.db',
+          database: config.db,
           entityPrefix: 'tetap_app_',
           logger: 'file',
           logging: true,

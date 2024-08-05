@@ -6,6 +6,7 @@ import SvgLoader from 'vite-svg-loader'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [
     vue({
       template: {
@@ -29,6 +30,8 @@ export default defineConfig({
     treeShaking: true
   },
   build: {
+    outDir: '../electron/release/app',
+    reportCompressedSize: false,
     chunkSizeWarningLimit: 2048,
     sourcemap: false
   },

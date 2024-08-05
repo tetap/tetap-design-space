@@ -7,10 +7,11 @@ import { HttpStatus, ValidationPipe } from '@nestjs/common';
 import { ExceptionsFilter } from './common/filter/ExceptionsFilter';
 import { HttpExceptionsFilter } from './common/filter/HttpExceptionsFilter';
 import { isDev } from './common/utils/dev';
+import config, { updateConfig } from './config';
 
 async function bootstrap() {
-  // 获取启动参数
-  const argv = process.argv.slice(2);
+  updateConfig(process.argv);
+
   const app = await NestFactory.create(AppModule, {
     cors: true, // 开启跨域访问
     logger: console,
@@ -56,7 +57,7 @@ async function bootstrap() {
   }
 
   //服务端口
-  const port = 39090;
+  const port = config.port;
   await app.listen(port);
 
   console.log(
@@ -71,5 +72,3 @@ async function bootstrap() {
   );
 }
 bootstrap();
-
-export default { a: 1 };
