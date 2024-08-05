@@ -7,14 +7,14 @@ export class TaskDto {
     required: false,
   })
   @IsOptional()
-  @Max(255, { message: '任务名称不能超过255' })
+  @Max(255, { message: 'name不能超过255个字符' })
   name?: string;
 
   @ApiProperty({
     title: '任务分组',
     required: true,
   })
-  @IsEmpty({ message: '分组不能为空' })
+  @IsEmpty({ message: 'groupId不能为空' })
   groupId: number;
 
   @ApiProperty({
@@ -22,13 +22,13 @@ export class TaskDto {
     required: false,
   })
   @IsOptional()
-  @Max(255, { message: '参数长度不能超过255' })
+  @Max(255, { message: 'params不能超过255个字符' })
   params?: string;
 
   @ApiProperty({
     title: '脚本',
     required: true,
   })
-  @IsEmpty({ message: '脚本不能为空' })
+  @IsEmpty({ message: 'script不能为空' })
   script: string;
 }

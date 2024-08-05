@@ -17,19 +17,32 @@ export class TaskGroupEntity extends BaseEntity {
   @Index()
   public name: string;
 
+  @ApiProperty({ description: '组代码' })
+  @Column({
+    type: 'varchar',
+    length: 255,
+    nullable: false,
+    comment: '组代码',
+    unique: true,
+  })
+  @Index()
+  public code: string;
+
   @ApiProperty({ description: '最大并发数' })
   @Column({
     type: 'int',
     nullable: false,
     comment: '最大并发数',
+    default: 1,
   })
   public maxConcurrency: number;
 
-  @ApiProperty({ description: '任务超时时间' })
+  @ApiProperty({ description: '任务超时时间(s)' })
   @Column({
     type: 'int',
     nullable: false,
-    comment: '任务超时时间',
+    comment: '任务超时时间(s)',
+    default: 60000,
   })
   public timeout: number;
 
@@ -38,14 +51,16 @@ export class TaskGroupEntity extends BaseEntity {
     type: 'int',
     nullable: false,
     comment: '任务重试次数',
+    default: 0,
   })
   public retryCount: number;
 
-  @ApiProperty({ description: '任务重试间隔' })
+  @ApiProperty({ description: '任务重试间隔(s)' })
   @Column({
     type: 'int',
     nullable: false,
-    comment: '任务重试间隔',
+    comment: '任务重试间隔(s)',
+    default: 10000,
   })
   public retryInterval: number;
 
@@ -54,14 +69,16 @@ export class TaskGroupEntity extends BaseEntity {
     type: 'int',
     nullable: false,
     comment: '任务超时重试次数',
+    default: 0,
   })
   public timeoutRetryCount: number;
 
-  @ApiProperty({ description: '任务超时重试间隔' })
+  @ApiProperty({ description: '任务超时重试间隔(s)' })
   @Column({
     type: 'int',
     nullable: false,
-    comment: '任务超时重试间隔',
+    comment: '任务超时重试间隔(s)',
+    default: 10000,
   })
   public timeoutRetryInterval: number;
 }

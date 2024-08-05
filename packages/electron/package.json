@@ -16,6 +16,7 @@
   },
   "author": "TETAP",
   "dependencies": {
+    "@tetap-design-space/service": "workspace:*",
     "electron-log": "^5.1.6",
     "electron-window-state": "^5.0.3",
     "shelljs": "^0.8.5"
@@ -56,7 +57,31 @@
       ]
     },
     "files": [
-      "./release/app/**/*"
+      "./release/app/**/*",
+      "!**/node_modules/**/*.{c,h,cpp,hpp,md,ts,map,iobj,lib,ipdb,mjs,scss,less,html,wiki,lock,rs,d.cts,spec.js,Makefile,bak}",
+      "!**/node_modules/**/LICENSE",
+      "!**/node_modules/**/LICENSE.APACHE2",
+      "!**/node_modules/**/LICENSE.BSD",
+      "!**/node_modules/**/LICENSE.MIT",
+      "!**/node_modules/**/LICENSE-MIT.txt",
+      "!**/node_modules/**/License",
+      "!**/node_modules/**/license",
+      "!**/node_modules/**/.eslintrc.js",
+      "!**/node_modules/sharp/vendor/**/*",
+      "!**/node_modules/prettier/**/*",
+      "!**/node_modules/axios/dist/**/*",
+      "!**/node_modules/async/*.js",
+      "!**/node_modules/@mobgi/file-md5/target/*",
+      "!**/node_modules/async/internal/*.js",
+      "!**/node_modules/**/{test,__tests__,tests,powered-test,example,examples,browser}",
+      "!**/node_modules/**/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/**/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/**/*.d.ts",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
     ],
     "mac": {
       "icon": "./assets/icons/icon.icns",

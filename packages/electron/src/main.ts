@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from 'electron'
+import { fork } from 'child_process'
 import { createWindow } from './window/mainWindow'
 import { installShortcut, unInstallShortcut } from './shortcut'
 import './utils/command'
@@ -6,6 +7,11 @@ import './utils/command'
   // 禁止应用创建多个
   const gotTheLock = app.requestSingleInstanceLock()
   if (!gotTheLock) return app.quit()
+
+  // 创建服务进程
+  fork(require.resolve('@tetap-design-space/service/dist/main.js'))
+
+  // 创建主窗口
   await app.whenReady()
   let mainWindow = await createWindow()
 
@@ -25,8 +31,7 @@ import './utils/command'
   })
 
   // 主窗口关闭时退出程序
-  mainWindow.on('close', (e: any) => {
-    console.log(e)
+  mainWindow.on('close', () => {
     app.quit()
   })
 

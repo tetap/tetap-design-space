@@ -71,8 +71,7 @@ class ExtensionWindowManager {
   }
 }
 
-export function initExtension(window: BrowserWindow) {
-  typeof window
+export function initExtension() {
   const extensionWindowManager = new ExtensionWindowManager()
   ipcMain.handle('open-extension', (_, store: StoreType) => {
     extensionWindowManager.open(store)

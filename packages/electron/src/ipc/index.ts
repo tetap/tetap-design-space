@@ -4,5 +4,5 @@ import { initExtension } from './src/extension'
 
 export function mainIpc(window: BrowserWindow) {
   initNav(window)
-  initExtension(window)
+  initExtension()
 }
