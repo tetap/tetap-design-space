@@ -1,12 +1,10 @@
 import helmet from 'helmet';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestFactory } from '@nestjs/core';
 import * as compression from 'compression';
 import { AppModule } from './app.module';
 import { HttpStatus, ValidationPipe } from '@nestjs/common';
 import { ExceptionsFilter } from './common/filter/ExceptionsFilter';
 import { HttpExceptionsFilter } from './common/filter/HttpExceptionsFilter';
-import { isDev } from './common/utils/dev';
 import config, { updateConfig } from './config';
 
 async function bootstrap() {
@@ -38,37 +36,11 @@ async function bootstrap() {
       crossOriginResourcePolicy: false,
     }),
   );
-  if (isDev) {
-    const swaggerOptions = new DocumentBuilder()
-      .setTitle('Tetap')
-      .setDescription('Tetap 接口文档')
-      .setVersion('2.0.0')
-      .addBearerAuth()
-      .build();
-    const document = SwaggerModule.createDocument(app, swaggerOptions);
-    // 项目依赖当前文档功能，最好不要改变当前地址
-    // 生产环境使用 nginx 可以将当前文档地址 屏蔽外部访问
-    SwaggerModule.setup(`/swagger-ui`, app, document, {
-      swaggerOptions: {
-        persistAuthorization: true,
-      },
-      customSiteTitle: 'Tetap API Docs',
-    });
-  }
 
   //服务端口
   const port = config.port;
   await app.listen(port);
 
-  console.log(
-    `Tetap 服务启动成功 `,
-    '\n',
-    '\n',
-    '服务地址',
-    `http://localhost:${port}/`,
-    '\n',
-    'swagger 文档地址        ',
-    `http://localhost:${port}/swagger-ui/`,
-  );
+  console.log(`Tetap 服务启动成功 `, '\n服务地址：\n', `http://localhost:${port}/`);
 }
 bootstrap();

@@ -19,7 +19,22 @@ import { TaskModule } from './module/task/task.module';
           timezone: '+08:00',
           database: config.db,
           entityPrefix: 'tetap_app_',
-          logger: 'file',
+          logger: {
+            logQueryError(error, query) {
+              console.error(error, query);
+            },
+            logQuery() {},
+            logQuerySlow(time, query) {
+              console.error('Logs query that is slow.', time, query);
+            },
+            logSchemaBuild() {},
+            logMigration() {},
+            log() {},
+          },
+          prepareDatabase: (db) => {
+            db.pragma('journal_mode = WAL');
+            db.pragma('synchronous = 0');
+          },
           logging: true,
           multipleStatements: true,
           dropSchema: false,

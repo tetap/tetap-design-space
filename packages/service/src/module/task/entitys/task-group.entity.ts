@@ -1,12 +1,10 @@
 import { Column, Entity, Index } from 'typeorm';
-import { ApiProperty } from '@nestjs/swagger';
 import { BaseEntity } from '../../../common/entities/base';
 
 @Entity('task-group', {
   comment: '任务组配置表',
 })
 export class TaskGroupEntity extends BaseEntity {
-  @ApiProperty({ description: '组名称' })
   @Column({
     type: 'varchar',
     length: 255,
@@ -17,7 +15,6 @@ export class TaskGroupEntity extends BaseEntity {
   @Index()
   public name: string;
 
-  @ApiProperty({ description: '组代码' })
   @Column({
     type: 'varchar',
     length: 255,
@@ -28,7 +25,6 @@ export class TaskGroupEntity extends BaseEntity {
   @Index()
   public code: string;
 
-  @ApiProperty({ description: '最大并发数' })
   @Column({
     type: 'int',
     nullable: false,
@@ -37,7 +33,6 @@ export class TaskGroupEntity extends BaseEntity {
   })
   public maxConcurrency: number;
 
-  @ApiProperty({ description: '任务超时时间(s)' })
   @Column({
     type: 'int',
     nullable: false,
@@ -46,7 +41,6 @@ export class TaskGroupEntity extends BaseEntity {
   })
   public timeout: number;
 
-  @ApiProperty({ description: '任务重试次数' })
   @Column({
     type: 'int',
     nullable: false,
@@ -55,7 +49,6 @@ export class TaskGroupEntity extends BaseEntity {
   })
   public retryCount: number;
 
-  @ApiProperty({ description: '任务重试间隔(s)' })
   @Column({
     type: 'int',
     nullable: false,
@@ -64,7 +57,6 @@ export class TaskGroupEntity extends BaseEntity {
   })
   public retryInterval: number;
 
-  @ApiProperty({ description: '任务超时重试次数' })
   @Column({
     type: 'int',
     nullable: false,
@@ -73,7 +65,6 @@ export class TaskGroupEntity extends BaseEntity {
   })
   public timeoutRetryCount: number;
 
-  @ApiProperty({ description: '任务超时重试间隔(s)' })
   @Column({
     type: 'int',
     nullable: false,

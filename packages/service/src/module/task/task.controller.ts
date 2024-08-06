@@ -1,20 +1,14 @@
 import { Body, Controller, Request, Post, Get, Param, Delete, Put } from '@nestjs/common';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { TaskDto } from './dto/task.dto';
 import { TaskService } from './task.service';
 import { ResultData } from 'src/common/utils/result';
 import { ResultEnum } from 'src/common/enum';
 import { TaskStatusEnum } from './enum/task.enum';
 
-@ApiTags('任务相关接口')
 @Controller('/task')
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
-  @ApiBody({
-    type: TaskDto,
-    required: true,
-  })
   @Post('/push')
   async push(@Body() job: TaskDto, @Request() req) {
     const result = await this.taskService.add(job);

@@ -1,4 +1,3 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { ResultEnum } from '../enum';
 
 /**
@@ -13,10 +12,10 @@ export class ResultData {
     this.data = data || null;
   }
 
-  @ApiProperty({ type: 'number', default: ResultEnum.SUCCESS })
+  // @ApiProperty({ type: 'number', default: ResultEnum.SUCCESS })
   code: number;
 
-  @ApiProperty({ type: 'string', default: 'ok' })
+  // @ApiProperty({ type: 'string', default: 'ok' })
   msg?: string;
 
   data?: any;

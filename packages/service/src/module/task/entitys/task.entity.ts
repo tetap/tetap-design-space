@@ -1,5 +1,4 @@
 import { Column, Entity, Index } from 'typeorm';
-import { ApiProperty } from '@nestjs/swagger';
 import { BaseEntity } from '../../../common/entities/base';
 import { TaskStatusEnum } from '../enum/task.enum';
 
@@ -7,7 +6,6 @@ import { TaskStatusEnum } from '../enum/task.enum';
   comment: '任务表',
 })
 export class TaskEntity extends BaseEntity {
-  @ApiProperty({ description: '任务名称' })
   @Column({
     type: 'varchar',
     length: 255,
@@ -17,7 +15,6 @@ export class TaskEntity extends BaseEntity {
   @Index()
   public name: string;
 
-  @ApiProperty({ description: '任务状态' })
   @Column({
     type: 'int',
     default: TaskStatusEnum.PENDING,
@@ -25,7 +22,6 @@ export class TaskEntity extends BaseEntity {
   })
   public status: TaskStatusEnum;
 
-  @ApiProperty({ description: '任务分组' })
   @Column({
     type: 'int',
     nullable: false,
@@ -34,7 +30,6 @@ export class TaskEntity extends BaseEntity {
   @Index()
   public groupId: number;
 
-  @ApiProperty({ description: '任务参数' })
   @Column({
     type: 'varchar',
     length: 255,
@@ -43,7 +38,6 @@ export class TaskEntity extends BaseEntity {
   })
   public params: string;
 
-  @ApiProperty({ description: '脚本' })
   @Column({
     type: 'varchar',
     length: 255,
