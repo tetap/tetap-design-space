@@ -73,4 +73,22 @@ export class TaskController {
   ) {
     return ResultData.ok(await this.taskService.fetched(code, status, limit));
   }
+
+  /**
+   * 重置指定状态的任务
+   * @param code
+   * @param status
+   * @param value
+   * @returns
+   */
+  @Get('/reset/:code')
+  async reset(
+    @Param('code') code: string,
+    @Query('status') status: TaskStatusEnum[],
+    @Query('value') value: TaskStatusEnum,
+    @Request() req,
+  ) {
+    await this.taskService.reset(code, status, value);
+    return ResultData.ok();
+  }
 }

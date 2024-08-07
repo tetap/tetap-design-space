@@ -5,8 +5,19 @@ const concurrency = args.concurrency;
 // 执行中的任务
 const taskList = [];
 
+const request = fetch(
+  `http://localhost:39090/task/reset/${args.code}?status=['running','retrying']&value='pending'`,
+  {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  },
+).catch((err) => {
+  console.error('Failed to fetch tasks', err);
+});
+
 const pollInterval = setInterval(() => {
-  console.log('Polling...');
   // 获取还可执行的数量
   const availableCount = concurrency - taskList.length;
   // 如果有可执行的任务
