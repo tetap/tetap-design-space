@@ -45,4 +45,12 @@ export class TaskEntity extends BaseEntity {
     comment: '脚本',
   })
   public script: string;
+
+  @Column({
+    type: 'varchar',
+    nullable: false,
+    comment: '执行时间 default now',
+    default: 'now',
+  })
+  public executeTime: Date;
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Request, Post, Get, Param, Delete, Put } from '@nestjs/common';
+import { Body, Controller, Request, Post, Get, Param, Delete, Put, Query } from '@nestjs/common';
 import { TaskDto } from './dto/task.dto';
 import { TaskService } from './task.service';
 import { ResultData } from 'src/common/utils/result';
@@ -56,5 +56,21 @@ export class TaskController {
       return ResultData.fail(ResultEnum.FAIL, '任务正在执行中');
     await this.taskService.update(id, { status: TaskStatusEnum.RETRYING });
     return ResultData.ok();
+  }
+
+  /**
+   * 获取任务列表
+   * @param code
+   * @param body
+   * @param req
+   */
+  @Get('/fetched/:code')
+  async fetched(
+    @Param('code') code: string,
+    @Query('status') status: TaskStatusEnum,
+    @Query('limit') limit: number,
+    @Request() req,
+  ) {
+    return ResultData.ok(await this.taskService.fetched(code, status, limit));
   }
 }

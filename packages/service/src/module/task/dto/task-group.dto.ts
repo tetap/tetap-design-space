@@ -1,15 +1,33 @@
-import { IsOptional, Max, IsEmpty } from 'class-validator';
+import { IsOptional, MaxLength, Max, Min, IsNotEmpty, IsNumber } from 'class-validator';
 
 export class TaskGroupDto {
-  @Max(255, { message: 'code不能超过255个字符' })
-  @IsEmpty({ message: 'code不能为空' })
-  code?: string;
+  @IsNotEmpty({ message: '任务组标识必填' })
+  code: string;
 
-  @Max(255, { message: 'name不能超过255个字符' })
-  @IsEmpty({ message: 'name不能为空' })
-  name?: string;
+  @IsNotEmpty({ message: '任务组名称必填' })
+  name: string;
 
   @IsOptional()
-  @Max(255, { message: 'note不能超过255个字符' })
+  @MaxLength(255, { message: 'note不能超过255个字符' })
   note?: string;
+
+  @IsOptional()
+  @IsNumber({}, { message: '并发数必须为数字' })
+  @Max(20, { message: '并发数不能高于20' })
+  @Min(1, { message: '并发数不能小于1' })
+  public concurrency: number;
+
+  @IsOptional()
+  @IsNumber({}, { message: '重试次数必须为数字' })
+  @Max(20, { message: '重试次数不能高于20' })
+  public retryCount: number;
+
+  @IsOptional()
+  @IsNumber({}, { message: '任务重试间隔(ms)必须为数字' })
+  public retryInterval: number;
+
+  @IsOptional()
+  @Min(1000, { message: '任务轮询间隔不能小于1000ms' })
+  @IsNumber({}, { message: '任务轮询间隔(ms)必须为数字' })
+  public pollInterval: number;
 }

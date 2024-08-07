@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Like } from 'typeorm';
+import { TaskProcess } from 'src/task';
 // #region dto
 import { TaskGroupDto } from './dto/task-group.dto';
 // #endregion dto
@@ -28,6 +28,16 @@ export class TaskGroupService {
     if (select) {
       saveData.id = select.id;
     }
-    return await this.taskGroupRepository.save(saveData);
+    const row = await this.taskGroupRepository.save(saveData);
+    const current = await this.taskGroupRepository.findOne({
+      where: {
+        id: row.id,
+      },
+    });
+    TaskProcess.start(current);
+  }
+
+  async getAll() {
+    return await this.taskGroupRepository.find();
   }
 }

@@ -46,6 +46,15 @@
         "to": "./"
       }
     ],
+    "extraFiles": [
+      {
+        "from": "node_modules/@tetap-design-space/",
+        "to": "extra_binaries",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
     "directories": {
       "buildResources": "./assets",
       "output": "../.././release"

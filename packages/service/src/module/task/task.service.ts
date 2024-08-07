@@ -10,6 +10,7 @@ import { TaskGroupEntity } from './entitys/task-group.entity';
 // #endregion entitys
 // #region types
 import type { Repository } from 'typeorm';
+import { TaskStatusEnum } from './enum/task.enum';
 // #endregion types
 
 @Injectable()
@@ -49,6 +50,32 @@ export class TaskService {
       where: {
         id,
       },
+    });
+  }
+  /**
+   * 获取指定状态条数的任务
+   * @param code
+   * @param status
+   * @param limit
+   * @returns
+   */
+  async fetched(code: string, status: TaskStatusEnum, limit: number) {
+    console.log('code', code, status, limit);
+    const group = await this.taskGroupRepository.findOne({
+      where: {
+        code: code,
+      },
+    });
+    if (!group) throw new Error('task group not found');
+    return this.taskRepository.find({
+      where: {
+        groupId: group.id,
+        status,
+      },
+      order: {
+        id: 'DESC',
+      },
+      take: limit,
     });
   }
 }

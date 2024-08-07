@@ -28,18 +28,10 @@ export class TaskGroupEntity extends BaseEntity {
   @Column({
     type: 'int',
     nullable: false,
-    comment: '最大并发数',
+    comment: '并发数',
     default: 1,
   })
-  public maxConcurrency: number;
-
-  @Column({
-    type: 'int',
-    nullable: false,
-    comment: '任务超时时间(s)',
-    default: 60000,
-  })
-  public timeout: number;
+  public concurrency: number;
 
   @Column({
     type: 'int',
@@ -52,7 +44,7 @@ export class TaskGroupEntity extends BaseEntity {
   @Column({
     type: 'int',
     nullable: false,
-    comment: '任务重试间隔(s)',
+    comment: '任务重试间隔(ms) default 10000',
     default: 10000,
   })
   public retryInterval: number;
@@ -60,16 +52,8 @@ export class TaskGroupEntity extends BaseEntity {
   @Column({
     type: 'int',
     nullable: false,
-    comment: '任务超时重试次数',
-    default: 0,
+    comment: '任务轮询间隔(ms) default 1000',
+    default: 1000,
   })
-  public timeoutRetryCount: number;
-
-  @Column({
-    type: 'int',
-    nullable: false,
-    comment: '任务超时重试间隔(s)',
-    default: 10000,
-  })
-  public timeoutRetryInterval: number;
+  public pollInterval: number;
 }

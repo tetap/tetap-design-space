@@ -1,10 +1,11 @@
 import { NestFactory } from '@nestjs/core';
-import * as compression from 'compression';
+import compression from 'compression';
 import { AppModule } from './app.module';
 import { HttpStatus, ValidationPipe } from '@nestjs/common';
 import { ExceptionsFilter } from './common/filter/ExceptionsFilter';
 import { HttpExceptionsFilter } from './common/filter/HttpExceptionsFilter';
 import config, { updateConfig } from './config';
+import { TaskProcess } from './task';
 
 async function bootstrap() {
   updateConfig(process.argv);
@@ -29,6 +30,7 @@ async function bootstrap() {
 
   //服务端口
   const port = config.port;
+
   await app.listen(port);
 
   console.log(`Tetap 服务启动成功 `, '\n服务地址：\n', `http://localhost:${port}/`);

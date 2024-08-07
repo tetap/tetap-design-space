@@ -18,7 +18,6 @@ import path from 'path'
       silent: true
     }
   )
-  console.log(service.pid)
   // 监听子进程发送的消息
   service.stdout.setEncoding('utf8')
   service.stdout.on('data', function (data) {
