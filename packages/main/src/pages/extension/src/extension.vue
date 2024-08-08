@@ -29,7 +29,16 @@
         </div>
       </div>
     </main>
-    <webview v-if="state.store" class="w-full h-full inline-flex" :src="state.store?.dev" />
+    <webview
+      v-if="state.store"
+      class="w-full h-full inline-flex"
+      :src="state.store?.dev + '?config=' + JSON.stringify(config || {})"
+      :allowpopups="false"
+      :disablewebsecurity="true"
+      @did-fail-load="handleDidFailLoad"
+      @did-start-loading="handleDidStartLoad"
+      @did-stop-loading="handleDidStopLoad"
+    />
   </ExtensionLayout>
 </template>
 
@@ -47,6 +56,8 @@ const state = reactive({
   error: '',
   store: null as null | (typeof AppStoreConfig)[0]
 })
+
+const config = window.TetapConfig
 
 getStoreInfo()
 
@@ -70,6 +81,20 @@ function getStoreInfo() {
 
 function handleClose() {
   window.ipc.send('close-extension', route.params.name)
+}
+
+function handleDidFailLoad() {
+  state.error = '404 Not Found'
+  state.store = null
+  state.loading = false
+}
+
+function handleDidStartLoad() {
+  state.loading = true
+}
+
+function handleDidStopLoad() {
+  state.loading = false
 }
 </script>
 

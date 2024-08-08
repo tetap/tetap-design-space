@@ -31,6 +31,7 @@ export default defineConfig({
   },
   build: {
     outDir: '../electron/release/app',
+    emptyOutDir: true,
     reportCompressedSize: false,
     chunkSizeWarningLimit: 2048,
     sourcemap: false

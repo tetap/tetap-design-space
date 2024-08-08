@@ -1,7 +1,7 @@
 {
   "name": "@tetap-design-space/electron",
   "description": "Tetap 工具箱",
-  "version": "2.2.2",
+  "version": "1.0.0",
   "scripts": {
     "dev": "pnpm run start",
     "start": "concurrently \"npm-run-all dev:tsc\"",
@@ -46,18 +46,9 @@
         "to": "./"
       }
     ],
-    "extraFiles": [
-      {
-        "from": "node_modules/@tetap-design-space/",
-        "to": "extra_binaries",
-        "filter": [
-          "**/*"
-        ]
-      }
-    ],
     "directories": {
       "buildResources": "./assets",
-      "output": "../.././release"
+      "output": "../.././release/${version}"
     },
     "win": {
       "icon": "./assets/icons/icon.ico",

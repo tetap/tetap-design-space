@@ -1,6 +1,6 @@
 import path from 'path';
 
-const config = { port: 39090, app: './', db: './databases/app.db' };
+const config = { port: 39090, app: './', db: '../../databases/app.db' };
 
 export const updateConfig = (argv: string[]) => {
   for (let i = 0; i < argv.length; i++) {

@@ -25,6 +25,7 @@
   "author": "Tetap",
   "license": "MIT",
   "devDependencies": {
+    "@tetap-design-space/service": "workspace:*",
     "electron": "^31.2.1",
     "tsup": "^8.2.4"
   }

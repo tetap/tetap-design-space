@@ -6,4 +6,6 @@ export enum TaskStatusEnum {
   RETRYING = 'retrying',
   CANCELED = 'canceled',
   PAUSE = 'pause',
+  // 意外终止 程序退出
+  ABORT = 'abort',
 }

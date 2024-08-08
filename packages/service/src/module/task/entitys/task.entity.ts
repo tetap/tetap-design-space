@@ -16,6 +16,15 @@ export class TaskEntity extends BaseEntity {
   public name: string;
 
   @Column({
+    type: 'varchar',
+    length: 255,
+    nullable: false,
+    unique: true,
+    comment: '任务标识',
+  })
+  public code: string;
+
+  @Column({
     type: 'int',
     default: TaskStatusEnum.PENDING,
     comment: '任务状态',

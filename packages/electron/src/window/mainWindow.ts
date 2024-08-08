@@ -33,7 +33,7 @@ async function createWindow() {
     resizable: true, // 禁止手动修改窗口尺寸
     webPreferences: {
       preload: join(__dirname, '..', 'preload'), // 加载脚本
-      backgroundThrottling: false,
+      // backgroundThrottling: false,
       nodeIntegration: true, // 渲染层可以使用node
       contextIsolation: true, //允许渲染进程使用nodejs
       webSecurity: false // 跨域

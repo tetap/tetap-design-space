@@ -33,4 +33,7 @@ interface Window {
     log: (message?: any, ...optionalParams: any[]) => void
     warn: (message?: any, ...optionalParams: any[]) => void
   }
+  TetapConfig?: {
+    serviceUri: string
+  }
 }

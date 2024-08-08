@@ -25,7 +25,7 @@ export class TaskService {
   async add(task: TaskDto) {
     const group = await this.taskGroupRepository.findOne({
       where: {
-        id: task.groupId,
+        code: task.groupCode,
         name: Like('%'),
       },
     });
@@ -50,6 +50,20 @@ export class TaskService {
     return await this.taskRepository.findOne({
       where: {
         id,
+      },
+    });
+  }
+  async getByCode(code: string, groupCode: string) {
+    const group = await this.taskGroupRepository.findOne({
+      where: {
+        code: groupCode,
+      },
+    });
+    if (!group) throw new Error('task group not found');
+    return await this.taskRepository.findOne({
+      where: {
+        code,
+        groupId: group.id,
       },
     });
   }

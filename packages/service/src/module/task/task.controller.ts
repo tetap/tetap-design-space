@@ -21,10 +21,16 @@ export class TaskController {
     return result ? ResultData.ok(result) : ResultData.fail(ResultEnum.FAIL, '未找到该任务');
   }
 
+  @Get('/bycode/:id')
+  async getByCode(@Param('id') code, @Query('groupCode') groupCode, @Request() req) {
+    const result = await this.taskService.getByCode(code, groupCode);
+    return result ? ResultData.ok(result) : ResultData.fail(ResultEnum.FAIL, '未找到该任务');
+  }
+
   @Delete('/delete/:id')
   async delete(@Param('id') id, @Request() req) {
     await this.taskService.delete(id);
-    return ResultData.ok();
+    return ResultData.ok(id);
   }
 
   @Put('/pause/:id')
@@ -43,7 +49,7 @@ export class TaskController {
     )
       return ResultData.fail(ResultEnum.FAIL, '任务状态不允许暂停');
     await this.taskService.update(id, { status: TaskStatusEnum.PAUSE });
-    return ResultData.ok();
+    return ResultData.ok(id);
   }
 
   @Put('/restart/:id')

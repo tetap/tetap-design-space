@@ -26,7 +26,7 @@ class ExtensionWindowManager {
 
     const extensionWindow = await this.createExtensionWindow(store)
     this.windows.set(id, { info: store, window: extensionWindow })
-    extensionWindow.on('closed', () => {
+    extensionWindow.on('close', () => {
       this.windows.delete(id)
     })
     return extensionWindow
@@ -45,7 +45,7 @@ class ExtensionWindowManager {
         hasShadow: false, // * app 边框阴影
         webPreferences: {
           preload: path.join(__dirname, '../../', 'preload'), // 加载脚本
-          backgroundThrottling: false,
+          // backgroundThrottling: false,
           nodeIntegration: true, // 渲染层可以使用node
           contextIsolation: true, //允许渲染进程使用nodejs
           webviewTag: true, // 允许使用webview标签
@@ -54,7 +54,7 @@ class ExtensionWindowManager {
       })
       const uri = NODE_ENV
         ? `http://localhost:18181/#/extension/${store.name}`
-        : `file://${path.resolve(__dirname, '../../')}/index.html/#/extension/${store.name}`
+        : `file://${path.resolve(__dirname, '../../')}/index.html#extension/${store.name}`
       window.loadURL(uri)
       if (NODE_ENV) {
         window.setAlwaysOnTop(true)

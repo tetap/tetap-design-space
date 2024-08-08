@@ -25,3 +25,7 @@ contextBridge.exposeInMainWorld('ipc', {
     ipcRenderer.removeAllListeners(channel)
   }
 })
+
+contextBridge.exposeInMainWorld('TetapConfig', {
+  serviceUri: 'http://localhost:39090'
+})

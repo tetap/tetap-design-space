@@ -24,10 +24,11 @@ export class TaskGroupDto {
 
   @IsOptional()
   @IsNumber({}, { message: '任务重试间隔(ms)必须为数字' })
+  @Min(1000, { message: '任务重试间隔(ms)必须高于1000(ms)' })
   public retryInterval: number;
 
   @IsOptional()
-  @Min(1000, { message: '任务轮询间隔不能小于1000ms' })
   @IsNumber({}, { message: '任务轮询间隔(ms)必须为数字' })
+  @Min(1000, { message: '任务轮询间隔不能小于1000ms' })
   public pollInterval: number;
 }

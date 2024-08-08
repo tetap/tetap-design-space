@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-[800px] h-full m-auto font-mono p-4">
-    <form @submit.prevent.stop="handleDownload" class="flex gap-2">
+    <form @submit.prevent.stop="handleSubmitSearch" class="flex gap-2">
       <input
         v-model.trim="state.uri"
         type="text"
@@ -10,10 +10,10 @@
 
       <button
         type="submit"
-        :disabled="state.loading"
+        :disabled="state.loading || state.downLoading"
         class="inline-flex justify-center rounded-lg text-sm font-semibold py-3 px-6 text-white"
         :class="[
-          state.loading
+          state.loading || state.downLoading
             ? 'cursor-not-allowed bg-primary-300'
             : ' bg-primary-600 hover:bg-primary-500 active:bg-primary-400'
         ]"
@@ -29,21 +29,19 @@
             <div class="font-bold text-sm mb-2">{{ state.page.bookName }}</div>
             <div class="text-xs text-gray-800 mb-2">作者：{{ state.page.author }}</div>
             <div class="text-xs text-gray-500">最近更新：{{ state.page.lastChapterTitle }}</div>
-            <div class="text-xs text-gray-500">当前已下载：{{ state.page.downloadCount }}章</div>
-            <div class="text-xs text-gray-500">
-              可下载：{{ state.page.chapterTotal - state.page.downloadCount }}章
-            </div>
           </div>
         </div>
         <button
           class="justify-center rounded-full w-full text-sm font-semibold py-2 px-6 text-white mt-2"
           :class="[
-            state.loading
-              ? 'cursor-not-allowed bg-primary-300'
+            state.loading || state.downLoading
+              ? 'cursor-not-allowed bg-primary-300 animate-pulse'
               : ' bg-primary-600 hover:bg-primary-500 active:bg-primary-400'
           ]"
+          :disabled="state.downLoading"
+          @click="handleDownload(state.page)"
         >
-          开始下载
+          {{ state.job ? '更新' : '开始下载' }}
         </button>
       </div>
     </div>
@@ -74,19 +72,29 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
 import Modal from './components/Modal.vue'
 import type { PageType } from './types/page.d'
 
 const state = reactive({
   uri: '',
   loading: false,
+  downLoading: false,
   error: '',
+  job: false,
   page: null as null | PageType
 })
 const reg = /^(http|https|ftp):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-.,@?^=%&:/~+#]*[\w\-@?^=%&/~+#])?$/
 
-function handleDownload() {
+const tetapConfig = JSON.parse(new URLSearchParams(location.search).get('config') || '{}')
+
+const config = {
+  namespace: window.namespace,
+  fanqieUri: 'https://fanqienovel.com/',
+  serviceUri: tetapConfig.serviceUri
+}
+
+function handleSubmitSearch() {
   if (!state.uri) {
     state.error = '请输入分享连接'
     return
@@ -121,7 +129,7 @@ async function fetchBook(bookId: string) {
   if (state.loading) return
   state.page = null
   state.loading = true
-  const request = await fetch(`https://fanqienovel.com/page/${bookId}`).catch((error) => {
+  const request = await fetch(`${config.fanqieUri}page/${bookId}`).catch((error) => {
     console.error('fetch book', error)
     state.error = '获取书籍信息失败，请检查书籍id是否正确'
   })
@@ -146,7 +154,17 @@ async function fetchBook(bookId: string) {
     if (!page?.bookId) {
       throw new Error('解析失败，请联系作者')
     }
+    const job = await fetch(
+      `${config.serviceUri}/task/bycode/${page.bookId}?groupCode=${config.namespace}`
+    )
+      .then((res) => res.json())
+      .catch((err) => {
+        console.error('fetch task bycode', err)
+        return null
+      })
+    state.job = !!job?.data
     state.page = page
+    console.log(page)
   } catch (error) {
     state.error = '解析失败，请联系作者'
     state.loading = false
@@ -154,4 +172,40 @@ async function fetchBook(bookId: string) {
   }
   state.loading = false
 }
+
+async function handleDownload(page: PageType) {
+  console.log(new URL('./script.ts', import.meta.url))
+  state.downLoading = true
+  state.downLoading = false
+  // await fetch(`${config.serviceUri}/task/push`, {
+  //   method: 'post',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify({
+  //     name: '下载' + page.bookName + '',
+  //     code: page.bookId,
+  //     groupCode: config.namespace,
+  //     params: JSON.stringify(page),
+  //     script: new URL('./script.ts', import.meta.url)
+  //   })
+  // })
+}
+
+onMounted(() => {
+  fetch(`${config.serviceUri}/task-group/register`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      code: config.namespace,
+      name: '番茄小说下载',
+      concurrency: 1,
+      retryCount: 0,
+      retryInterval: 3000,
+      pollInterval: 3000
+    })
+  })
+})
 </script>

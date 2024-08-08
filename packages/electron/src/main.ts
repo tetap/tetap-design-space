@@ -9,28 +9,28 @@ import path from 'path'
   const gotTheLock = app.requestSingleInstanceLock()
   if (!gotTheLock) return app.quit()
 
-  // 创建服务进程
-  // if (process.env.NODE_ENV !== 'development') {
-  const service = fork(
-    require.resolve('@tetap-design-space/service/dist/main.js'),
-    [JSON.stringify({ prop: 39090, appPath: path.parse(app.getPath('exe')).dir })],
-    {
-      silent: true
-    }
-  )
-  // 监听子进程发送的消息
-  service.stdout.setEncoding('utf8')
-  service.stdout.on('data', function (data) {
-    console.log('stdout', data)
-  })
-  service.stderr.setEncoding('utf8')
-  service.stderr.on('data', function (data) {
-    console.error('stderr', data)
-  })
-  service.on('error', (error) => {
-    console.log('service error', error)
-  })
-  // }
+    // 创建服务进程
+  if (process.env.NODE_ENV !== 'development') {
+    const service = fork(
+      require.resolve('@tetap-design-space/service/dist/main.js'),
+      [JSON.stringify({ prop: 39090, appPath: path.parse(app.getPath('exe')).dir })],
+      {
+        silent: true
+      }
+    )
+    // 监听子进程发送的消息
+    service.stdout.setEncoding('utf8')
+    service.stdout.on('data', function (data) {
+      console.log('stdout', data)
+    })
+    service.stderr.setEncoding('utf8')
+    service.stderr.on('data', function (data) {
+      console.error('stderr', data)
+    })
+    service.on('error', (error) => {
+      console.log('service error', error)
+    })
+  }
 
   // 创建主窗口
   await app.whenReady()
