@@ -4,6 +4,7 @@ import { TaskService } from './task.service';
 import { ResultData } from 'src/common/utils/result';
 import { ResultEnum } from 'src/common/enum';
 import { TaskStatusEnum } from './enum/task.enum';
+import { TaskEntity } from './entitys/task.entity';
 
 @Controller('/task')
 export class TaskController {
@@ -11,8 +12,8 @@ export class TaskController {
 
   @Post('/push')
   async push(@Body() job: TaskDto, @Request() req) {
-    const result = await this.taskService.add(job);
-    return ResultData.ok(result.raw.id);
+    const result = (await this.taskService.add(job)) as any;
+    return ResultData.ok(result.raw);
   }
 
   @Get('/get/:id')

@@ -68,12 +68,12 @@
       </p>
     </div>
   </div>
-  <Modal v-if="state.error" :message="state.error" @confirm="state.error = ''" />
+  <ErrorModal v-if="state.error" :message="state.error" @confirm="state.error = ''" />
 </template>
 
 <script lang="ts" setup>
 import { reactive, onMounted } from 'vue'
-import Modal from './components/Modal.vue'
+import ErrorModal from './components/ErrorModal.vue'
 import type { PageType } from './types/page.d'
 
 const state = reactive({
@@ -150,7 +150,8 @@ async function fetchBook(bookId: string) {
     return
   }
   try {
-    const page = JSON.parse(initialState).page as PageType
+    //  as PageType
+    const page = JSON.parse(initialState).page as any
     if (!page?.bookId) {
       throw new Error('解析失败，请联系作者')
     }
@@ -162,9 +163,13 @@ async function fetchBook(bookId: string) {
         console.error('fetch task bycode', err)
         return null
       })
+    delete page.volumeNameList
+    delete page.abstract
+    delete page.itemIds
+    delete page.category
+    delete page.categoryV2
     state.job = !!job?.data
     state.page = page
-    console.log(page)
   } catch (error) {
     state.error = '解析失败，请联系作者'
     state.loading = false
@@ -176,20 +181,30 @@ async function fetchBook(bookId: string) {
 async function handleDownload(page: PageType) {
   console.log(new URL('./script.ts', import.meta.url))
   state.downLoading = true
+  await fetch(`${config.serviceUri}/task/push`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name: '下载' + page.bookName + '',
+      code: page.bookId,
+      groupCode: config.namespace,
+      params: JSON.stringify(page),
+      script: new URL('./script.ts', import.meta.url)
+    })
+  })
+    .then((res) => res.json())
+    .then((json) => {
+      if (json.code !== 200) {
+        alert(json.msg || '下载失败')
+        return
+      }
+      alert('正在下载')
+      state.job = true
+    })
+    .catch(() => {})
   state.downLoading = false
-  // await fetch(`${config.serviceUri}/task/push`, {
-  //   method: 'post',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify({
-  //     name: '下载' + page.bookName + '',
-  //     code: page.bookId,
-  //     groupCode: config.namespace,
-  //     params: JSON.stringify(page),
-  //     script: new URL('./script.ts', import.meta.url)
-  //   })
-  // })
 }
 
 onMounted(() => {

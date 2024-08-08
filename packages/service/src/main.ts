@@ -5,7 +5,7 @@ import { HttpStatus, ValidationPipe } from '@nestjs/common';
 import { ExceptionsFilter } from './common/filter/ExceptionsFilter';
 import { HttpExceptionsFilter } from './common/filter/HttpExceptionsFilter';
 import config, { updateConfig } from './config';
-import { TaskProcess } from './task';
+import { json } from 'express';
 
 async function bootstrap() {
   updateConfig(process.argv);
@@ -14,6 +14,8 @@ async function bootstrap() {
     cors: true, // 开启跨域访问
     logger: console,
   });
+
+  app.use(json({ limit: '100mb' }));
 
   app.use(compression());
 

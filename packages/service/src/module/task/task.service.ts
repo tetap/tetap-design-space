@@ -35,9 +35,22 @@ export class TaskService {
     const obj = Object.assign(
       {
         name: task.name || name,
+        groupId: group.id,
       },
       task,
     );
+    const isRepeat = await this.taskRepository.findOne({
+      where: {
+        code: task.code,
+      },
+    });
+    if (isRepeat) {
+      await this.taskRepository.update(isRepeat.id, {
+        ...isRepeat,
+        status: TaskStatusEnum.PENDING,
+      });
+      return { raw: isRepeat.id };
+    }
     return await this.taskRepository.insert(obj);
   }
   async update(id: number, task: Partial<TaskEntity>) {
