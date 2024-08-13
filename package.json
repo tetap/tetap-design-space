@@ -4,9 +4,10 @@
   "version": "1.0.0",
   "scripts": {
     "tetap": "yr-cli",
-    "dev": "concurrently \"npm-run-all dev:web\" \"pnpm run dev:electron\"",
+    "dev": "concurrently \"pnpm run dev:service\" \"pnpm run dev:web\" \"pnpm run dev:electron\"",
     "dev:electron": "pnpm run -C packages/electron dev",
     "dev:web": "pnpm run -C packages/main dev",
+    "dev:service": "pnpm run -C packages/service fix && pnpm run -C packages/service dev",
     "electron:fix": "pnpm run run:electron:fix && pnpm run -C packages/electron deps",
     "run:electron:fix": "cd packages/electron/node_modules/electron && node install",
     "lint:eslint": "eslint --fix --ext .js,.ts,.tsx ./packages",
